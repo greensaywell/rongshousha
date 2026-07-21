@@ -48,14 +48,14 @@ export function GameSetup() {
   return (
     <div className="h-screen flex flex-col bg-slate-50">
       {/* 顶部标题 */}
-      <header className="bg-white border-b px-6 py-4">
-        <h1 className="text-2xl font-bold text-slate-900">绒兽杀后台控制器</h1>
-        <p className="text-sm text-slate-500 mt-1">创建新游戏：配置身份、玩家和地图</p>
+      <header className="bg-white border-b px-4 md:px-6 py-3 md:py-4">
+        <h1 className="text-lg md:text-2xl font-bold text-slate-900">绒兽杀后台控制器</h1>
+        <p className="text-xs md:text-sm text-slate-500 mt-1">创建新游戏：配置身份、玩家和地图</p>
       </header>
 
       {/* 主内容 */}
-      <main className="flex-1 overflow-auto p-6">
-        <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <main className="flex-1 overflow-auto p-3 md:p-6">
+        <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6">
           {/* 列1：身份配置 */}
           <Card>
             <CardHeader className="pb-3">
@@ -266,9 +266,9 @@ export function GameSetup() {
       </main>
 
       {/* 底部操作栏 */}
-      <footer className="bg-white border-t px-6 py-4">
-        <div className="max-w-5xl mx-auto flex items-center justify-between">
-          <div className="text-sm text-slate-500">
+      <footer className="bg-white border-t px-3 md:px-6 py-3 md:py-4">
+        <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-2 md:gap-0 md:justify-between">
+          <div className="text-xs md:text-sm text-slate-500 text-center md:text-left">
             <span className="font-medium">{totalPlayers}</span> 名玩家
             <span className="mx-2">|</span>
             <span className="font-medium text-red-600">{killerCount}</span> 杀手

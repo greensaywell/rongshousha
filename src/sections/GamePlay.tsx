@@ -70,16 +70,16 @@ export function GamePlay() {
   }
 
   return (
-    <div className="h-full flex flex-col gap-3">
+    <div className="h-full flex flex-col gap-2 md:gap-3">
       {/* 顶部状态栏 */}
-      <div className="flex items-center gap-3 bg-white rounded-lg border px-4 py-3">
-        <Badge variant="secondary" className="text-sm font-mono shrink-0">
+      <div className="flex flex-wrap items-center gap-2 bg-white rounded-lg border px-3 md:px-4 py-2 md:py-3">
+        <Badge variant="secondary" className="text-xs md:text-sm font-mono shrink-0">
           第 {round} 轮
         </Badge>
         <div className="flex-1 min-w-0">
-          <h2 className="text-base font-bold text-slate-900">{phaseName}</h2>
+          <h2 className="text-sm md:text-base font-bold text-slate-900 truncate">{phaseName}</h2>
         </div>
-        <div className="flex items-center gap-2 shrink-0">
+        <div className="flex items-center gap-1 md:gap-2 shrink-0 flex-wrap">
           <Badge variant="outline" className="text-green-600 border-green-300 bg-green-50">
             <Heart className="w-3 h-3 mr-1" />
             存活 {alivePlayers.length}
@@ -100,14 +100,14 @@ export function GamePlay() {
       </div>
 
       {/* 操作提示 */}
-      <div className="bg-amber-50 border border-amber-200 rounded-lg px-4 py-2.5 flex items-start gap-2">
-        <AlertTriangle className="w-4 h-4 text-amber-600 mt-0.5 shrink-0" />
-        <p className="text-sm text-amber-800">{actionHint}</p>
+      <div className="bg-amber-50 border border-amber-200 rounded-lg px-3 md:px-4 py-2 md:py-2.5 flex items-start gap-2">
+        <AlertTriangle className="w-3.5 h-3.5 md:w-4 md:h-4 text-amber-600 mt-0.5 shrink-0" />
+        <p className="text-xs md:text-sm text-amber-800">{actionHint}</p>
       </div>
 
-      <div className="flex-1 flex flex-col lg:flex-row gap-3 min-h-0">
+      <div className="flex-1 flex flex-col lg:flex-row gap-2 md:gap-3 min-h-0">
         {/* 左侧：地图 */}
-        <Card className="flex-1 flex flex-col min-h-0">
+        <Card className="flex-1 flex flex-col min-h-0 max-h-[40vh] lg:max-h-none">
           <CardHeader className="pb-2 shrink-0 flex flex-row items-center justify-between">
             <CardTitle className="flex items-center gap-2 text-sm">
               <Navigation className="w-4 h-4 text-blue-600" />
@@ -138,7 +138,7 @@ export function GamePlay() {
         </Card>
 
         {/* 右侧：角色操作卡片 / 凌宇神社查看 */}
-        <Card className="w-full lg:w-[540px] shrink-0 flex flex-col min-h-0">
+        <Card className="w-full lg:w-[540px] shrink-0 flex flex-col min-h-0 max-h-[50vh] lg:max-h-none">
           <CardHeader className="pb-2 shrink-0">
             <CardTitle className="flex items-center gap-2 text-sm">
               {phase === 'shrine_vision' ? (

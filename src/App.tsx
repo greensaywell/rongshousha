@@ -21,18 +21,18 @@ function App() {
     return (
       <div className="h-screen flex flex-col">
         <Tabs defaultValue="players" className="flex-1 flex flex-col">
-          <div className="bg-white border-b px-4 py-2 flex items-center gap-3">
-            <h1 className="text-lg font-bold text-slate-900">绒兽杀后台控制器</h1>
-            <Badge variant="outline" className="text-xs">设置中</Badge>
-            <Separator orientation="vertical" className="h-5 mx-1" />
-            <TabsList className="h-8">
-              <TabsTrigger value="players" className="text-xs h-7 px-3">
-                <Users className="w-3.5 h-3.5 mr-1.5" />
-                玩家与身份
+          <div className="bg-white border-b px-3 md:px-4 py-2 flex flex-wrap items-center gap-2 md:gap-3">
+            <h1 className="text-base md:text-lg font-bold text-slate-900 shrink-0">绒兽杀</h1>
+            <Badge variant="outline" className="text-[10px] md:text-xs">设置中</Badge>
+            <Separator orientation="vertical" className="hidden md:block h-5 mx-1" />
+            <TabsList className="h-7 md:h-8">
+              <TabsTrigger value="players" className="text-[10px] md:text-xs h-6 md:h-7 px-2 md:px-3">
+                <Users className="w-3 h-3 md:w-3.5 md:h-3.5 mr-1" />
+                玩家
               </TabsTrigger>
-              <TabsTrigger value="map" className="text-xs h-7 px-3">
-                <Map className="w-3.5 h-3.5 mr-1.5" />
-                地图编辑
+              <TabsTrigger value="map" className="text-[10px] md:text-xs h-6 md:h-7 px-2 md:px-3">
+                <Map className="w-3 h-3 md:w-3.5 md:h-3.5 mr-1" />
+                地图
               </TabsTrigger>
             </TabsList>
           </div>

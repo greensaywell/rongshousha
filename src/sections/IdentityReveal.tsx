@@ -51,10 +51,10 @@ export function IdentityReveal() {
   return (
     <div className="h-screen flex flex-col bg-slate-900">
       {/* 头部 */}
-      <header className="px-6 py-4 border-b border-slate-700 flex items-center justify-between">
-        <div>
-          <h1 className="text-xl font-bold text-white">身份发布阶段</h1>
-          <p className="text-sm text-slate-400 mt-1">
+      <header className="px-3 md:px-6 py-3 md:py-4 border-b border-slate-700 flex flex-col md:flex-row items-start md:items-center gap-2 md:justify-between">
+        <div className="w-full md:w-auto">
+          <h1 className="text-lg md:text-xl font-bold text-white">身份发布阶段</h1>
+          <p className="text-xs md:text-sm text-slate-400 mt-1">
             杀手 <span className="text-red-400 font-bold">{killers.length}</span> 人
             <span className="mx-2">|</span>
             平民 <span className="text-blue-400 font-bold">{civilians.length}</span> 人
@@ -93,7 +93,7 @@ export function IdentityReveal() {
             </div>
           )}
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 flex-wrap mt-2 md:mt-0">
           {/* 随机分配英雄按钮 */}
           {heroPoolEnabled && !hasHeroesAssigned && (
             <Button
@@ -147,8 +147,8 @@ export function IdentityReveal() {
       </header>
 
       {/* 身份卡片 */}
-      <main className="flex-1 overflow-auto p-6">
-        <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <main className="flex-1 overflow-auto p-3 md:p-6">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
           {players.map((player) => {
             const isRevealed = revealedIds.has(player.id);
             const color = getIdentityColor(player.identity);
@@ -247,7 +247,7 @@ export function IdentityReveal() {
                                     color: heroColor,
                                   }}
                                 >
-                                  {skill.limit === 'once_per_game' ? '每局1次' : skill.limit}
+                                  {skill.limit === 'once_per_game' ? '每局1次' : skill.limit === 'once_per_round' ? '每轮1次' : skill.limit}
                                 </Badge>
                               </div>
                               <p className="text-xs text-slate-400 mt-0.5">
