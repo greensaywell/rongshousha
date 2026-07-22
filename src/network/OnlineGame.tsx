@@ -5,7 +5,7 @@ import { getReachableLocations } from '@/data/gameData'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent } from '@/components/ui/card'
-import { HeroSkill } from '@/types/hero'
+import type { HeroSkill } from '@/types/hero'
 import {
   Map, MessageSquare, ChevronUp, ChevronDown,
   Footprints, Swords, Zap, Eye, ArrowLeft,
