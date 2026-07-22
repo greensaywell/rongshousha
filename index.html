@@ -6,7 +6,16 @@
     <title>绒兽杀后台控制器</title>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <div style="display:flex;align-items:center;justify-content:center;height:100vh;background:#0f172a;color:#94a3b8;font-family:sans-serif;flex-direction:column;">
+        <div style="font-size:48px;margin-bottom:16px;">🎮</div>
+        <div style="font-size:18px;font-weight:bold;color:#e2e8f0;">绒兽杀</div>
+        <div style="font-size:12px;margin-top:8px;">加载中...</div>
+      </div>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
+    <script nomodule>
+      document.getElementById('root').innerHTML = '您的浏览器不支持ES模块';
+    </script>
   </body>
 </html>
