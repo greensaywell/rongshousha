@@ -34,11 +34,11 @@ export function OnlineGame({ isHost, debugMode, botNames, onLeave }: OnlineGameP
   const [actionOpen, setActionOpen] = useState(false)
   const [ready, setReady] = useState(false)
   const [allReady, setAllReady] = useState(false)
-  const [phase] = useState<'investigate' | 'action' | 'move' | 'vote'>('investigate')
+  const phase = useGameStore((s) => s.phase)
   const [popup, setPopup] = useState<Popup | null>(null)
   const [selectedAction, setSelectedAction] = useState<string | null>(null)
 
-  const { players, locations, round, movePlayer } = useGameStore()
+  const { players, locations, round, movePlayer, nextPhase } = useGameStore()
 
   // 调试模式：空壳自动准备
   useEffect(() => {
@@ -78,7 +78,11 @@ export function OnlineGame({ isHost, debugMode, botNames, onLeave }: OnlineGameP
     : []
 
   const phaseName: Record<string, string> = {
-    investigate: '侦查阶段', action: '行动阶段', move: '移动阶段', vote: '投票阶段',
+    investigate1: '探查①', action1: '行动①', settlement1: '结算①', move1: '移动②',
+    investigate2: '探查②', action2: '行动②', settlement2: '结算②', move2: '移动③',
+    investigate3: '探查③', action3: '行动③', settlement3: '结算③', move4: '移动④',
+    investigate4: '探查④', action4: '行动④', settlement4: '结算④',
+    death_report: '死亡播报', speak: '发言', vote: '投票', end: '结束',
   }
 
   // 可到达地点
@@ -93,11 +97,11 @@ export function OnlineGame({ isHost, debugMode, botNames, onLeave }: OnlineGameP
     if (!currentPlayer || !currentLoc || !targetLoc) return
     const isConnected = currentLoc.connectedTo.includes(locId)
     if (isConnected) {
-      confirm(`移动确认`, () => {
+      confirm(`从 ${currentLoc.name} 移动到 ${targetLoc.name}？`, () => {
         movePlayer(currentPlayer.id, locId)
         setSelectedAction(null)
         setActionOpen(false)
-        info('移动成功', `已移动到 ${targetLoc.name}`)
+        info('移动成功', `已到达 ${targetLoc.name}`)
       })
     } else {
       info('无法移动', `${currentLoc.name} 与 ${targetLoc.name} 之间没有道路相连`)
@@ -116,6 +120,10 @@ export function OnlineGame({ isHost, debugMode, botNames, onLeave }: OnlineGameP
           {round ? `第 ${round} 轮` : '准备中'}
         </Badge>
         <Badge className="text-[10px] bg-indigo-600">{phaseName[phase] || '游戏中'}</Badge>
+        <Button variant="ghost" size="sm" onClick={() => confirm('进入下一阶段？', () => nextPhase())}
+          className="h-6 text-[10px] text-slate-300 hover:text-white px-1.5">
+          下一阶段 ▸
+        </Button>
         <div className="flex-1" />
         {isHost && <Badge variant="outline" className="text-[10px] text-amber-400 border-amber-700">房主</Badge>}
         {debugMode && <Badge className="text-[10px] bg-amber-600">调试</Badge>}
@@ -276,13 +284,13 @@ export function OnlineGame({ isHost, debugMode, botNames, onLeave }: OnlineGameP
                   <div className="px-3 pb-2 space-y-1.5">
                     <div className="grid grid-cols-4 gap-1.5">
                       <ActionBtn icon={Footprints} label="移动" onClick={() => {
-                        if (phase !== 'move') { info('非移动阶段', '当前不是移动阶段，无法执行此操作'); return }
+                        if (!phase.startsWith('move')) { info('非移动阶段', '当前不是移动阶段'); return }
                         setSelectedAction('move')
                       }} />
                       <ActionBtn icon={Swords} label="攻击" onClick={() => {
-                        if (currentPlayer?.identity !== 'killer') { info('权限不足', '仅杀手可以进行攻击'); return }
+                        if (currentPlayer?.identity !== 'killer') { info('权限不足', '仅杀手可以攻击'); return }
                         if (!phase.startsWith('action')) { info('非行动阶段', '当前不是行动阶段'); return }
-                        setSelectedAction('attack')
+                        info('敬请期待', '攻击功能开发中 🦊')
                       }} />
                       <ActionBtn icon={Zap} label="技能" onClick={comingSoon} />
                       <ActionBtn icon={Eye} label="侦查" onClick={comingSoon} />
